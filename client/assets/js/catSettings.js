@@ -49,12 +49,44 @@ function getDna(){
 }
 
 function renderCat(dna){
+    // Head Color Initiated
     headColor(colors[dna.headcolor],dna.headcolor)
     $('#bodycolor').val(dna.headcolor)
+
+    // Mouth/Body/Tail Initiated
+    mouthBodyTailColor(colors[dna.mouthColor],dna.mouthColor)
+    $('#mouthBodyTailcolor').val(dna.mouthColor)
+
+    // Eyes Initiated
+    eyeColor(colors[dna.eyesColor],dna.eyesColor)
+    $('#eyecolor').val(dna.eyesColor)
+
+    // Ear Initiated
+    earColor(colors[dna.earsColor],dna.earsColor)
+    $('#earcolor').val(dna.earsColor)
+
 }
 
 // Changing cat colors
 $('#bodycolor').change(()=>{
     var colorVal = $('#bodycolor').val()
     headColor(colors[colorVal],colorVal)
+})
+
+// Changing cat Mouth/Legs/Tail colors
+$('#mouthBodyTailcolor').change(()=>{
+  var mouthColorVal = $('#mouthBodyTailcolor').val()
+  mouthBodyTailColor(colors[mouthColorVal],mouthColorVal)
+})
+
+// Changing cat Eye colors
+$('#eyecolor').change(()=>{
+  var eyeColorVal = $('#eyecolor').val()
+  eyeColor(colors[eyeColorVal],eyeColorVal)
+})
+
+// Changing cat Eye colors
+$('#earcolor').change(()=>{
+  var earColorVal = $('#earcolor').val()
+  earColor(colors[earColorVal],earColorVal)
 })

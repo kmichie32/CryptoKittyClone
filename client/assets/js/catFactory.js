@@ -21,6 +21,23 @@ function headColor(color,code) {
     $('#dnabody').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }
 
+function mouthBodyTailColor(color,code) {
+    $('.cat__mouth-contour, .cat__mouth-left, .cat__mouth-right,.cat__paw-left_inner, .cat__paw-left, .cat__paw-right_inner, .cat__paw-right, .cat__tail').css('background', '#' + color)  //This changes the color of the cat
+    $('#mouthcode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnamouth').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function eyeColor(color,code) {
+    $('.pupil-left, .pupil-right').css('background', '#' + color)  //This changes the color of the cat
+    $('#eyecode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnaeyes').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function earColor(color,code) {
+    $('.cat__ear--left, .cat__ear--right').css('background', '#' + color)  //This changes the color of the cat
+    $('#earcode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnaears').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
 
 //###################################################
 //Functions below will be used later on in the project

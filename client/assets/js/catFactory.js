@@ -43,13 +43,31 @@ function earColor(color,code) {
 //Functions below will be used later on in the project
 //###################################################
 function eyeVariation(num) {
-
+    // Note: num is coming in as Text and NOT and int
     $('#dnashape').html(num)
     switch (num) {
-        case 1:
+        case "1":
             normalEyes()
-            $('#eyeName').html('Basic')
+            $('#eyeShapeCode').html('Basic')
             break
+        case "2":
+            normalEyes()
+            $('#eyeShapeCode').html('Chill')
+            chillEyes()
+            break
+        case "3":
+                normalEyes()
+                $('#eyeShapeCode').html('Lucky Right')
+                luckyRightEye()
+                break
+        case "4":
+                normalEyes()
+                $('#eyeShapeCode').html('Lucky Left')
+                luckyLeftEye()
+                break
+        default:
+            console.log("Not 1 or 2")
+
     }
 }
 
@@ -63,8 +81,23 @@ function decorationVariation(num) {
     }
 }
 
-async function normalEyes() {
-    await $('.cat__eye').find('span').css('border', 'none')
+function normalEyes() {
+    console.log($('#eyecolor').val())
+    $('.pupil-right').css('background', '#' + colors[$('#eyecolor').val()])
+    $('.pupil-left').css('background', '#' + colors[$('#eyecolor').val()])
+    $('.cat__eye').find('span').css('border', 'none')
+}
+
+function chillEyes() {
+    $('.cat__eye').find('span').css('border-top', '15px solid')
+}
+
+function luckyRightEye() {
+    $('.pupil-right').css('background', '#' + getColor())
+}
+
+function luckyLeftEye() {
+    $('.pupil-left').css('background', '#' + getColor())
 }
 
 async function normaldecoration() {

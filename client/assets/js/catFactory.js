@@ -90,15 +90,26 @@ function eyeVariation(num) {
 function decorationVariation(num) {
     $('#dnadecoration').html(num)
     switch (num) {
-        case 1:
-            $('#decorationName').html('Basic')
+        case "1":
+            $('#decorationCode').html('Basic')
             normaldecoration()
             break
+        case "2":
+            $('#decorationCode').html('Wide')
+            wideDecoration()
+            break
+        case "3":
+                $('#decorationCode').html('Narrow')
+                narrowDecoration()
+                break
+        case "4":
+                $('#decorationCode').html('Mirror')
+                mirrordecoration()
+                break
     }
 }
 
 function normalEyes() {
-    console.log($('#eyecolor').val())
     $('.pupil-right').css('display','block');
     $('.cat__eye--right').css('display','block');
     $('.cat__eye--left, .cat__eye--right').css('background', 'white')
@@ -136,6 +147,30 @@ async function normaldecoration() {
     //Remove all style from other decorations
     //In this way we can also use normalDecoration() to reset the decoration style
     $('.cat__head-dots').css({ "transform": "rotate(0deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
+    $('.cat__head-dots_first').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
+    $('.cat__head-dots_second').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
+}
+
+async function wideDecoration() {
+    //Remove all style from other decorations
+    //In this way we can also use normalDecoration() to reset the decoration style
+    $('.cat__head-dots').css({ "transform": "rotate(0deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
+    $('.cat__head-dots_first').css({ "transform": "rotate(45deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
+    $('.cat__head-dots_second').css({ "transform": "rotate(315deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
+}
+
+async function narrowDecoration() {
+    //Remove all style from other decorations
+    //In this way we can also use normalDecoration() to reset the decoration style
+    $('.cat__head-dots').css({ "transform": "rotate(0deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
+    $('.cat__head-dots_first').css({ "transform": "rotate(-45deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
+    $('.cat__head-dots_second').css({ "transform": "rotate(-315deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
+}
+
+async function mirrordecoration() {
+    //Remove all style from other decorations
+    //In this way we can also use normalDecoration() to reset the decoration style
+    $('.cat__head-dots').css({ "transform": "rotate(180deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
     $('.cat__head-dots_first').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
     $('.cat__head-dots_second').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
 }

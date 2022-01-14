@@ -16,13 +16,13 @@ function genColors(){
 
 //This function code needs to modified so that it works with Your cat code.
 function headColor(color,code) {
-    $('.cat__head, .cat__chest').css('background', '#' + color)  //This changes the color of the cat
+    $('.cat__head, .cat__chest, .cat__paw-left_inner, .cat__paw-left, .cat__paw-right_inner, .cat__paw-right, .cat__ear--left, .cat__ear--right').css('background', '#' + color)  //This changes the color of the cat
     $('#headcode').html('code: '+code) //This updates text of the badge next to the slider
     $('#dnabody').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }
 
 function mouthBodyTailColor(color,code) {
-    $('.cat__mouth-contour, .cat__mouth-left, .cat__mouth-right,.cat__paw-left_inner, .cat__paw-left, .cat__paw-right_inner, .cat__paw-right, .cat__tail').css('background', '#' + color)  //This changes the color of the cat
+    $('.cat__mouth-contour, .cat__mouth-left, .cat__mouth-right,.cat__chest_inner, .cat__tail').css('background', '#' + color)  //This changes the color of the cat
     $('#mouthcode').html('code: '+code) //This updates text of the badge next to the slider
     $('#dnamouth').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }
@@ -34,7 +34,7 @@ function eyeColor(color,code) {
 }
 
 function earColor(color,code) {
-    $('.cat__ear--left, .cat__ear--right').css('background', '#' + color)  //This changes the color of the cat
+    $('.cat__ear--left-inside, .cat__ear--right-inside').css('background', '#' + color)  //This changes the color of the cat
     $('#earcode').html('code: '+code) //This updates text of the badge next to the slider
     $('#dnaears').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }

@@ -101,7 +101,7 @@ function normalEyes() {
     console.log($('#eyecolor').val())
     $('.pupil-right').css('display','block');
     $('.cat__eye--right').css('display','block');
-
+    $('.cat__eye--left, .cat__eye--right').css('background', 'white')
     $('.pupil-right').css('background', '#' + colors[$('#eyecolor').val()])
     $('.pupil-left').css('background', '#' + colors[$('#eyecolor').val()])
     $('.cat__eye').find('span').css('border', 'none')

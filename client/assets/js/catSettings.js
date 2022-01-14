@@ -73,6 +73,12 @@ function renderCat(dna){
     decorationVariation(dna.decorationPattern+'')
     $('#decorationShape').val(dna.decorationPattern)
 
+    // Middle Decoration Color Initiated
+    midDecorColor(colors[dna.decorationMidcolor],dna.decorationMidcolor)
+    $('#decorationMidColor').val(dna.decorationMidcolor)
+
+    outsideDecorColor(colors[dna.decorationSidescolor],dna.decorationSidescolor)
+    $('#decorationOutsideColor').val(dna.decorationSidescolor)
 
 }
 
@@ -110,4 +116,14 @@ $('#eyeShape').change(()=>{
 $('#decorationShape').change(()=>{
   var shape = $('#decorationShape').val()
   decorationVariation(shape)
+})
+
+$('#decorationMidColor').change(()=>{
+  var midDecorColorVal = $('#decorationMidColor').val()
+  midDecorColor(colors[midDecorColorVal],midDecorColorVal)
+})
+
+$('#decorationOutsideColor').change(()=>{
+  var outsideDecorColorVal = $('#decorationOutsideColor').val()
+  outsideDecorColor(colors[outsideDecorColorVal],outsideDecorColorVal)
 })

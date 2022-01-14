@@ -87,6 +87,7 @@ function eyeVariation(num) {
     }
 }
 
+// Decoration Shape
 function decorationVariation(num) {
     $('#dnadecoration').html(num)
     switch (num) {
@@ -99,14 +100,27 @@ function decorationVariation(num) {
             wideDecoration()
             break
         case "3":
-                $('#decorationCode').html('Narrow')
-                narrowDecoration()
-                break
+            $('#decorationCode').html('Narrow')
+            narrowDecoration()
+            break
         case "4":
-                $('#decorationCode').html('Mirror')
-                mirrordecoration()
-                break
+            $('#decorationCode').html('Mirror')
+            mirrordecoration()
+            break
     }
+}
+
+// Decoration Color
+function midDecorColor(color,code) {
+    $('#midDot').css('background', '#' + color)  //This changes the color of the cat
+    $('#decorationMidCode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnadecorationMid').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function outsideDecorColor(color,code) {
+    $('#rightDot, #leftDot').css('background', '#' + color)  //This changes the color of the cat
+    $('#decorationOutsideCode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnadecorationSides').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }
 
 function normalEyes() {

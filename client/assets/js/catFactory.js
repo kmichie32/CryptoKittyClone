@@ -65,8 +65,24 @@ function eyeVariation(num) {
                 $('#eyeShapeCode').html('Lucky Left')
                 luckyLeftEye()
                 break
+        case "5":
+                normalEyes()
+                $('#eyeShapeCode').html('Derpy')
+                derpyEyes()
+                break
+        case "6":
+                normalEyes()
+                $('#eyeShapeCode').html('Laser')
+                laserEyes()
+                break
+        case "7":
+                normalEyes()
+                $('#eyeShapeCode').html('Cyclops')
+                cyclops()
+                break
         default:
-            console.log("Not 1 or 2")
+                normalEyes()
+                $('#eyeShapeCode').html('Basic')
 
     }
 }
@@ -83,6 +99,9 @@ function decorationVariation(num) {
 
 function normalEyes() {
     console.log($('#eyecolor').val())
+    $('.pupil-right').css('display','block');
+    $('.cat__eye--right').css('display','block');
+
     $('.pupil-right').css('background', '#' + colors[$('#eyecolor').val()])
     $('.pupil-left').css('background', '#' + colors[$('#eyecolor').val()])
     $('.cat__eye').find('span').css('border', 'none')
@@ -98,6 +117,19 @@ function luckyRightEye() {
 
 function luckyLeftEye() {
     $('.pupil-left').css('background', '#' + getColor())
+}
+function derpyEyes() {
+    $('.pupil-right').css('border-left', '15px solid')
+}
+
+function laserEyes() {
+    $('.cat__eye--left, .cat__eye--right').css('background', 'red')
+}
+
+function cyclops() {
+    $('.cat__eye--right').css('display','none');
+
+    $('.pupil-right').css('display','none');
 }
 
 async function normaldecoration() {

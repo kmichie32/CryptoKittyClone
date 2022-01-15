@@ -188,3 +188,73 @@ async function mirrordecoration() {
     $('.cat__head-dots_first').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
     $('.cat__head-dots_second').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
 }
+
+function animationVariation(num){
+    $('#dnaanimation').html(num);
+    switch(num) {
+        case 1:
+                $('#animationCode').html('Moving Head')
+                animationType1();
+                break;
+        case 2:
+                $('#animationCode').html('Ear Wiggles')
+                animationType2();
+                break;
+        case 3:
+                $('#animationCode').html('Tail Wiggles')
+                animationType3();
+                break;
+        case 4:
+                $('#animationCode').html('Head And Tail Wiggles')
+                animationType4();
+                break;
+        case 5:
+                $('#animationCode').html('Ear And Tail Wiggles')
+                animationType5();
+                break;
+        case 6:
+                $('#animationCode').html('No Wiggles')
+                clearAnimations();
+                break;
+        default:
+            break;
+    }
+}
+
+function animationType1(){
+    clearAnimations();
+    $('#head').addClass("movingHead");
+}
+
+function animationType2(){
+    clearAnimations();
+    $('#rightEar').addClass("movingRightEar");
+    $('#leftEar').addClass("movingLeftEar");
+}
+
+function animationType3(){
+    clearAnimations();
+    $('#tail').addClass("movingTail");
+}
+
+function animationType4(){
+    clearAnimations();
+    $('#head').addClass("movingHead");
+    $('#tail').addClass("movingTail");
+}
+
+function animationType5(){
+    clearAnimations();
+    $('#rightEar').addClass("movingRightEar");
+    $('#leftEar').addClass("movingLeftEar");
+    $('#tail').addClass("movingTail");
+}
+
+function clearAnimations(){
+    $('#head').removeClass("movingHead");
+    $('#rightEar').removeClass("movingRightEar");
+    $('#leftEar').removeClass("movingLeftEar");
+    $('#tail').removeClass("movingTail");
+
+
+}

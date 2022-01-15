@@ -80,6 +80,8 @@ function renderCat(dna){
     outsideDecorColor(colors[dna.decorationSidescolor],dna.decorationSidescolor)
     $('#decorationOutsideColor').val(dna.decorationSidescolor)
 
+    animationVariation(dna.animation)
+    $('#animation').val(dna.animation)
 }
 
 // Changing cat colors
@@ -126,4 +128,9 @@ $('#decorationMidColor').change(()=>{
 $('#decorationOutsideColor').change(()=>{
   var outsideDecorColorVal = $('#decorationOutsideColor').val()
   outsideDecorColor(colors[outsideDecorColorVal],outsideDecorColorVal)
+})
+
+$('#animation').change(()=>{
+  var animationVal = parseInt($('#animation').val())
+  animationVariation(animationVal)
 })

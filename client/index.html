@@ -96,43 +96,59 @@
             </div>
                 <div class="col-lg-7 cattributes m-2 light-b-shadow">
                     <!-- Cat colors -->
-                    <div id="catColors">
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Head And Body</b><span class="badge badge-dark ml-2" id="headcode"></span></label>
-                            <input type="range" min="10" max="98" class="form-control-range" id="bodycolor">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="catColors-tab" data-toggle="tab" href="#catColors" role="tab" aria-controls="catColors" aria-selected="true">Cat Colors</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#catShapes" role="tab" aria-controls="catShapes" aria-selected="false">Cat Shapes</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content">
+                      <div class="tab-pane active" id="catColors" role="tabpanel" aria-labelledby="catColors-tab">
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Head And Body</b><span class="badge badge-dark ml-2" id="headcode"></span></label>
+                                <input type="range" min="10" max="98" class="form-control-range" id="bodycolor">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Mouth/Body/Tail</b><span class="badge badge-dark ml-2" id="mouthcode"></span></label>
+                                <input type="range" min="10" max="98" class="form-control-range" id="mouthBodyTailcolor">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Eyes</b><span class="badge badge-dark ml-2" id="eyecode"></span></label>
+                                <input type="range" min="10" max="98" class="form-control-range" id="eyecolor">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Ears</b><span class="badge badge-dark ml-2" id="earcode"></span></label>
+                                <input type="range" min="10" max="98" class="form-control-range" id="earcolor">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Mouth/Body/Tail</b><span class="badge badge-dark ml-2" id="mouthcode"></span></label>
-                            <input type="range" min="10" max="98" class="form-control-range" id="mouthBodyTailcolor">
+                        <div class="tab-pane" id="catShapes" role="tabpanel" aria-labelledby="catShapes-tab">
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Eye Shape</b><span class="badge badge-dark ml-2" id="eyeShapeCode"></span></label>
+                                <input type="range" min="1" max="7" class="form-control-range" id="eyeShape">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Decoration</b><span class="badge badge-dark ml-2" id="decorationCode"></span></label>
+                                <input type="range" min="1" max="4" class="form-control-range" id="decorationShape">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Decoration Middle Color</b><span class="badge badge-dark ml-2" id="decorationMidCode"></span></label>
+                                <input type="range" min="10" max="98" class="form-control-range" id="decorationMidColor">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Decoration Outside Color</b><span class="badge badge-dark ml-2" id="decorationOutsideCode"></span></label>
+                                <input type="range" min="10" max="98" class="form-control-range" id="decorationOutsideColor">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Animation</b><span class="badge badge-dark ml-2" id="animationCode"></span></label>
+                                <input type="range" min="1" max="6" class="form-control-range" id="animation">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Eyes</b><span class="badge badge-dark ml-2" id="eyecode"></span></label>
-                            <input type="range" min="10" max="98" class="form-control-range" id="eyecolor">
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Ears</b><span class="badge badge-dark ml-2" id="earcode"></span></label>
-                            <input type="range" min="10" max="98" class="form-control-range" id="earcolor">
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Eye Shape</b><span class="badge badge-dark ml-2" id="eyeShapeCode"></span></label>
-                            <input type="range" min="1" max="7" class="form-control-range" id="eyeShape">
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Decoration</b><span class="badge badge-dark ml-2" id="decorationCode"></span></label>
-                            <input type="range" min="1" max="4" class="form-control-range" id="decorationShape">
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Decoration Middle Color</b><span class="badge badge-dark ml-2" id="decorationMidCode"></span></label>
-                            <input type="range" min="10" max="98" class="form-control-range" id="decorationMidColor">
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Decoration Outside Color</b><span class="badge badge-dark ml-2" id="decorationOutsideCode"></span></label>
-                            <input type="range" min="10" max="98" class="form-control-range" id="decorationOutsideColor">
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlRange"><b>Animation</b><span class="badge badge-dark ml-2" id="animationCode"></span></label>
-                            <input type="range" min="1" max="6" class="form-control-range" id="animation">
-                        </div>
+                      </div>
+                        <button id="random-kitty-btn" type="button" class="btn btn-primary">Get Random Kitty</button>
+                        <button id="default-kitty-btn" type="button" class="btn btn-danger">Default Kitty</button>
+                        <button type="button" class="btn btn-success">Create New Kitty</button>
                     </div>
                 </div>
             </div>

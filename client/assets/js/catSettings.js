@@ -1,6 +1,10 @@
 
 var colors = Object.values(allColors())
 
+function randomIntFromInterval(min,max){
+  return Math.floor(Math.random()*(max-min+1)+min);
+}
+
 var defaultDNA = {
     "headcolor" : 10,
     "mouthColor" : 13,
@@ -14,6 +18,51 @@ var defaultDNA = {
     "animation" :  1,
     "lastNum" :  1
     }
+
+
+function renderRandomCat(){
+  // Head Color Initiated
+  var headColorValue = randomIntFromInterval(10,98);
+  headColor(colors[headColorValue],headColorValue)
+  $('#bodycolor').val(headColorValue)
+
+  // Mouth/Body/Tail Initiated
+  var mouthColorValue = randomIntFromInterval(10,98);
+  mouthBodyTailColor(colors[mouthColorValue],mouthColorValue)
+  $('#mouthBodyTailcolor').val(mouthColorValue)
+
+  // Eyes Initiated
+  var eyesColorValue = randomIntFromInterval(10,98);
+  eyeColor(colors[eyesColorValue],eyesColorValue)
+  $('#eyecolor').val(eyesColorValue)
+
+  // Ear Initiated
+  var earColorValue = randomIntFromInterval(10,98);
+  earColor(colors[earColorValue],earColorValue)
+  $('#earcolor').val(earColorValue)
+
+  // Ear Initiated
+  var eyeVarValue = randomIntFromInterval(1,7);
+  eyeVariation(eyeVarValue+'')
+  $('#eyeShape').val(eyeVarValue)
+
+  // Decoration Shape Initiated
+  var decorVarValue = randomIntFromInterval(1,4);
+  decorationVariation(decorVarValue+'')
+  $('#decorationShape').val(decorVarValue)
+
+  // Middle Decoration Color Initiated
+  var midColorValue = randomIntFromInterval(10,98);
+  midDecorColor(colors[midColorValue],midColorValue)
+  $('#decorationMidColor').val(midColorValue)
+
+  var outsideColorValue = randomIntFromInterval(10,98);
+  outsideDecorColor(colors[outsideColorValue],outsideColorValue)
+  $('#decorationOutsideColor').val(outsideColorValue)
+
+  animationVariation(dna.animation)
+  $('#animation').val(dna.animation)
+}
 
 // when page load
 $( document ).ready(function() {
@@ -133,4 +182,12 @@ $('#decorationOutsideColor').change(()=>{
 $('#animation').change(()=>{
   var animationVal = parseInt($('#animation').val())
   animationVariation(animationVal)
+})
+
+$('#default-kitty-btn').click(()=>{
+  renderCat(defaultDNA)
+})
+
+$('#random-kitty-btn').click(()=>{
+  renderRandomCat()
 })

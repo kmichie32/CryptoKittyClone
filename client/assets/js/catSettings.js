@@ -60,8 +60,9 @@ function renderRandomCat(){
   outsideDecorColor(colors[outsideColorValue],outsideColorValue)
   $('#decorationOutsideColor').val(outsideColorValue)
 
-  animationVariation(dna.animation)
-  $('#animation').val(dna.animation)
+  var animationValue = randomIntFromInterval(1,6);
+  animationVariation(animationValue)
+  $('#animation').val(animationValue)
 }
 
 // when page load

@@ -1,0 +1,260 @@
+
+//Random color
+function getColor() {
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    return randomColor
+}
+
+function genColors(){
+    var colors = []
+    for(var i = 10; i < 99; i ++){
+      var color = getColor()
+      colors[i] = color
+    }
+    return colors
+}
+
+//This function code needs to modified so that it works with Your cat code.
+function headColor(color,code) {
+    $('.cat__head, .cat__chest, .cat__paw-left_inner, .cat__paw-left, .cat__paw-right_inner, .cat__paw-right, .cat__ear--left, .cat__ear--right').css('background', '#' + color)  //This changes the color of the cat
+    $('#headcode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnabody').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function mouthBodyTailColor(color,code) {
+    $('.cat__mouth-contour, .cat__mouth-left, .cat__mouth-right,.cat__chest_inner, .cat__tail').css('background', '#' + color)  //This changes the color of the cat
+    $('#mouthcode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnamouth').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function eyeColor(color,code) {
+    $('.pupil-left, .pupil-right').css('background', '#' + color)  //This changes the color of the cat
+    $('#eyecode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnaeyes').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function earColor(color,code) {
+    $('.cat__ear--left-inside, .cat__ear--right-inside').css('background', '#' + color)  //This changes the color of the cat
+    $('#earcode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnaears').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+//###################################################
+//Functions below will be used later on in the project
+//###################################################
+function eyeVariation(num) {
+    // Note: num is coming in as Text and NOT and int
+    $('#dnashape').html(num)
+    switch (num) {
+        case "1":
+            normalEyes()
+            $('#eyeShapeCode').html('Basic')
+            break
+        case "2":
+            normalEyes()
+            $('#eyeShapeCode').html('Chill')
+            chillEyes()
+            break
+        case "3":
+                normalEyes()
+                $('#eyeShapeCode').html('Lucky Right')
+                luckyRightEye()
+                break
+        case "4":
+                normalEyes()
+                $('#eyeShapeCode').html('Lucky Left')
+                luckyLeftEye()
+                break
+        case "5":
+                normalEyes()
+                $('#eyeShapeCode').html('Derpy')
+                derpyEyes()
+                break
+        case "6":
+                normalEyes()
+                $('#eyeShapeCode').html('Laser')
+                laserEyes()
+                break
+        case "7":
+                normalEyes()
+                $('#eyeShapeCode').html('Cyclops')
+                cyclops()
+                break
+        default:
+                normalEyes()
+                $('#eyeShapeCode').html('Basic')
+
+    }
+}
+
+// Decoration Shape
+function decorationVariation(num) {
+    $('#dnadecoration').html(num)
+    switch (num) {
+        case "1":
+            $('#decorationCode').html('Basic')
+            normaldecoration()
+            break
+        case "2":
+            $('#decorationCode').html('Wide')
+            wideDecoration()
+            break
+        case "3":
+            $('#decorationCode').html('Narrow')
+            narrowDecoration()
+            break
+        case "4":
+            $('#decorationCode').html('Mirror')
+            mirrordecoration()
+            break
+    }
+}
+
+// Decoration Color
+function midDecorColor(color,code) {
+    $('#midDot').css('background', '#' + color)  //This changes the color of the cat
+    $('#decorationMidCode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnadecorationMid').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function outsideDecorColor(color,code) {
+    $('#rightDot, #leftDot').css('background', '#' + color)  //This changes the color of the cat
+    $('#decorationOutsideCode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnadecorationSides').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function normalEyes() {
+    $('.pupil-right').css('display','block');
+    $('.cat__eye--right').css('display','block');
+    $('.cat__eye--left, .cat__eye--right').css('background', 'white')
+    $('.pupil-right').css('background', '#' + colors[$('#eyecolor').val()])
+    $('.pupil-left').css('background', '#' + colors[$('#eyecolor').val()])
+    $('.cat__eye').find('span').css('border', 'none')
+}
+
+function chillEyes() {
+    $('.cat__eye').find('span').css('border-top', '15px solid')
+}
+
+function luckyRightEye() {
+    $('.pupil-right').css('background', '#' + getColor())
+}
+
+function luckyLeftEye() {
+    $('.pupil-left').css('background', '#' + getColor())
+}
+function derpyEyes() {
+    $('.pupil-right').css('border-left', '15px solid')
+}
+
+function laserEyes() {
+    $('.cat__eye--left, .cat__eye--right').css('background', 'red')
+}
+
+function cyclops() {
+    $('.cat__eye--right').css('display','none');
+
+    $('.pupil-right').css('display','none');
+}
+
+async function normaldecoration() {
+    //Remove all style from other decorations
+    //In this way we can also use normalDecoration() to reset the decoration style
+    $('.cat__head-dots').css({ "transform": "rotate(0deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
+    $('.cat__head-dots_first').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
+    $('.cat__head-dots_second').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
+}
+
+async function wideDecoration() {
+    //Remove all style from other decorations
+    //In this way we can also use normalDecoration() to reset the decoration style
+    $('.cat__head-dots').css({ "transform": "rotate(0deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
+    $('.cat__head-dots_first').css({ "transform": "rotate(45deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
+    $('.cat__head-dots_second').css({ "transform": "rotate(315deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
+}
+
+async function narrowDecoration() {
+    //Remove all style from other decorations
+    //In this way we can also use normalDecoration() to reset the decoration style
+    $('.cat__head-dots').css({ "transform": "rotate(0deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
+    $('.cat__head-dots_first').css({ "transform": "rotate(-45deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
+    $('.cat__head-dots_second').css({ "transform": "rotate(-315deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
+}
+
+async function mirrordecoration() {
+    //Remove all style from other decorations
+    //In this way we can also use normalDecoration() to reset the decoration style
+    $('.cat__head-dots').css({ "transform": "rotate(180deg)", "height": "48px", "width": "14px", "top": "1px", "border-radius": "0 0 50% 50%" })
+    $('.cat__head-dots_first').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "50% 0 50% 50%" })
+    $('.cat__head-dots_second').css({ "transform": "rotate(0deg)", "height": "35px", "width": "14px", "top": "1px", "border-radius": "0 50% 50% 50%" })
+}
+
+function animationVariation(num){
+    $('#dnaanimation').html(num);
+    switch(num) {
+        case 1:
+                $('#animationCode').html('Moving Head')
+                animationType1();
+                break;
+        case 2:
+                $('#animationCode').html('Ear Wiggles')
+                animationType2();
+                break;
+        case 3:
+                $('#animationCode').html('Tail Wiggles')
+                animationType3();
+                break;
+        case 4:
+                $('#animationCode').html('Head And Tail Wiggles')
+                animationType4();
+                break;
+        case 5:
+                $('#animationCode').html('Ear And Tail Wiggles')
+                animationType5();
+                break;
+        case 6:
+                $('#animationCode').html('No Wiggles')
+                clearAnimations();
+                break;
+        default:
+            break;
+    }
+}
+
+function animationType1(){
+    clearAnimations();
+    $('#head').addClass("movingHead");
+}
+
+function animationType2(){
+    clearAnimations();
+    $('#rightEar').addClass("movingRightEar");
+    $('#leftEar').addClass("movingLeftEar");
+}
+
+function animationType3(){
+    clearAnimations();
+    $('#tail').addClass("movingTail");
+}
+
+function animationType4(){
+    clearAnimations();
+    $('#head').addClass("movingHead");
+    $('#tail').addClass("movingTail");
+}
+
+function animationType5(){
+    clearAnimations();
+    $('#rightEar').addClass("movingRightEar");
+    $('#leftEar').addClass("movingLeftEar");
+    $('#tail').addClass("movingTail");
+}
+
+function clearAnimations(){
+    $('#head').removeClass("movingHead");
+    $('#rightEar').removeClass("movingRightEar");
+    $('#leftEar').removeClass("movingLeftEar");
+    $('#tail').removeClass("movingTail");
+
+
+}

@@ -1,0 +1,65 @@
+.movingHead {
+    animation: moveHead 3s infinite;
+}
+
+@keyframes moveHead {
+    0%{
+        transform: rotate(0deg);
+    }
+    33%{
+        transform: rotate(5deg);
+    }
+    66%{
+        transform: rotate(-5deg)
+    }
+    100%{
+        transform: rotate(0deg)
+    }
+}
+
+.movingRightEar {
+    animation: moveRightEar 3s infinite;
+}
+
+@keyframes moveRightEar {
+    0%{
+        transform: rotate(170deg);
+    }
+    50%{
+        transform: rotate(190deg);
+    }
+    100%{
+        transform: rotate(170deg)
+    }
+}
+
+.movingLeftEar {
+    animation: moveLeftEar 3s infinite;
+}
+
+@keyframes moveLeftEar {
+    0%{
+        transform: scale(-1, 1) rotate(170deg);
+    }
+    50%{
+        transform: scale(-1, 1) rotate(190deg);
+    }
+    100%{
+        transform: scale(-1, 1) rotate(170deg)
+    }
+}
+.movingTail {
+    animation: moveTail 3s infinite;
+}
+
+@keyframes moveTail {
+    0%{
+        transform: rotate(-45deg);
+    }
+    50%{
+        transform: rotate(-15deg);
+    }
+    100%{
+        transform: rotate(-45deg)
+    }
+}

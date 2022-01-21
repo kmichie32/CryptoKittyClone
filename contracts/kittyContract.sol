@@ -42,13 +42,13 @@ contract kittyContract is IERC721, Ownable {
         uint256 generation,
         address owner) {
             require(_kittenId < kitties.length, "Kitty not found");
-
+            owner = ownerOf(_kittenId);
             return (kitties[_kittenId].genes, 
             uint256(kitties[_kittenId].birthTime),
             uint256(kitties[_kittenId].mumId),
             uint256(kitties[_kittenId].dadId),
             uint256(kitties[_kittenId].generation),
-            ownerOf(_kittenId)
+            owner
             );
         }
 
@@ -68,7 +68,7 @@ contract kittyContract is IERC721, Ownable {
         address _owner) private returns (uint256) {
             Kitty memory _kitty = Kitty({
                 genes: _genes,
-                birthTime: uint64(now),
+                birthTime: uint64(block.timestamp),
                 mumId: uint32(_mumId),
                 dadId: uint32(_dadId),
                 generation: uint16(_generation)
@@ -118,7 +118,7 @@ contract kittyContract is IERC721, Ownable {
      *
      * - `tokenId` must exist.
      */
-    function ownerOf(uint256 tokenId) external override view returns (address owner){
+    function ownerOf(uint256 tokenId) public override view returns (address owner){
         require(kittyIndexToOwner[tokenId] != address(0), "Token Does Not Exist");
         return kittyIndexToOwner[tokenId];
     }

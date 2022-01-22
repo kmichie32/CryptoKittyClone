@@ -21,13 +21,31 @@ $(document).ready(function(){
 
         console.log(instance);
 
-        // use this as your base for creating a kitty on the blockchain
-        instance.methods.createKityGen0(dnaStr).send({}, function(error, txHash){
-            if(error){
-                console.log(error);
-            } else {
-                console.log(txHash);
-            }
+        $('#create-kitty-btn').click(function(evt){
+            console.log('CLICK');
+            var dnaStr = getDna();
+            console.log(dnaStr);
+            instance.methods.createKittyGen0(dnaStr).send({}, function(error, txHash){
+                if(error){
+                    console.log(error);
+                } else {
+                    instance.events.Birth({}, function(error, event){ 
+                        console.log(event);
+                        console.log(event.returnValues);
+                        $('#kittenOwner').text(event.returnValues.owner)
+                        $('#kittenId').text(event.returnValues.kittenId)
+                        $('#kittnMumId').text(event.returnValues.mumId)
+                        $('#kittenDadId').text(event.returnValues.dadId)
+                        $('#kittenGenes').text(event.returnValues.genes)
+
+                        $('#exampleModal').modal('show'); 
+                    })
+                    console.log(txHash);
+                }
+            })
         })
+
+        // use this as your base for creating a kitty on the blockchain
+
     })
 })

@@ -150,7 +150,7 @@
                       </div>
                         <button id="random-kitty-btn" type="button" class="btn btn-primary">Get Random Kitty</button>
                         <button id="default-kitty-btn" type="button" class="btn btn-danger">Default Kitty</button>
-                        <button type="button" class="btn btn-success">Create New Kitty</button>
+                        <button id="create-kitty-btn" type="button" class="btn btn-success" >Create New Kitty</button>
                     </div>
                 </div>
             </div>
@@ -158,6 +158,29 @@
 
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Congrats On Your New Kitty!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                        Owner: <span id="kittenOwner"></span><br>
+                        Kitten Id: <span id="kittenId"></span><br>
+                        Mom: <span id="kittnMumId"></span><br>
+                        Dad: <span id="kittenDadId"></span><br>
+                        Genes: <span id="kittenGenes"></span><br>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
 
 
     </div>

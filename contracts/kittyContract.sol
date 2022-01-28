@@ -22,6 +22,13 @@ contract kittyContract is IERC721, Ownable {
     mapping(address => uint256) ownershipTokenCount;
     mapping(uint256 => address) public kittyIndexToOwner;
 
+    mapping(uint256 => address) public kittyIndexToApproved;
+
+    //MyAddress => OperatorAddress => TRUE/FALSE
+    // EX: _operatorApprovals[MyAddress][OperatorAddress] = false;
+    mapping(uint256 => mapping(address => bool)) private _operatorApprovals;
+
+
     struct Kitty {
         uint256 genes;
         uint64 birthTime;
@@ -148,6 +155,7 @@ contract kittyContract is IERC721, Ownable {
         ownershipTokenCount[_to] = ownershipTokenCount[_to].add(1);
         if(_from != address(0)) {
             ownershipTokenCount[_from] = ownershipTokenCount[_from].sub(1);
+            delete kittyIndexToApproved[_tokenId];
         }
         emit Transfer(_from, _to, _tokenId);
     }
@@ -155,4 +163,28 @@ contract kittyContract is IERC721, Ownable {
     function _owns(address _claimant, uint256 _tokenId) internal view returns (bool result) {
         return kittyIndexToOwner[_tokenId] == _claimant;
     }
+
+    function approve(address _approved, uint256 _tokenId) override external{
+        require(_owns(msg.sender, _tokenId) || isApprovedForAll(ownerOf[_tokenId], _approved));
+        kittyIndexToApproved[_tokenId] = _approved;
+        emit Approval(msg.sender, _approved, _tokenId);
+    }
+
+    function setApprovalForAll(address _operator, bool _approved) override external {
+        require(_operator != msg.sender);
+        
+        _operatorApprovals[msg.sender][_operator] = _approved;
+        emit ApprovalForAll(msg.sender, _operator, _approved);
+    }
+
+    function getApproved(uint256 _tokenId) override external view returns (address) {
+        require(_tokenId < totalSupply());
+        return kittyIndexToApproved[_tokenId];
+    }
+
+    function isApprovedForAll(address _owner, address _operator) override external view returns (bool) {
+        return _operatorApprovals[_owner][_operator];
+    }
+
+
 }

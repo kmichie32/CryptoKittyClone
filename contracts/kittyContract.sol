@@ -186,5 +186,13 @@ contract kittyContract is IERC721, Ownable {
         return _operatorApprovals[_owner][_operator];
     }
 
+    function transferFrom(address _from, address _to, uint256 _tokenId) override external {
+        require(msg.sender == _from || isApprovedForAll(_from, msg.sender) || getApproved[_tokenId] == msg.sender);
+        require(_owns(_from, _tokenId));
+        require(_to != address(0));
+        require(_tokenId < totalSupply());
+        _transfer(_from, _to, _tokenId);
+    }
+
 
 }

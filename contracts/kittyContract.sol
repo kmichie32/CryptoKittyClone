@@ -3,7 +3,10 @@ pragma solidity >=0.5.10;
 import "./IERC721.sol";
 import "../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./IERC721Receiver.sol";
 
+// START AT 11:00 mark
+// https://academy.moralis.io/lessons/assignment-safetransfer-implementation
 
 contract kittyContract is IERC721, Ownable {
 
@@ -19,6 +22,8 @@ contract kittyContract is IERC721, Ownable {
     string public constant token = "KevinKitties";
     string public constant symbolOfToken = "KK";
     uint256 public constant CREATION_LIMIT_GEN0 = 10;
+    bytes4 internal constant MAGIC_ERC721_RECEIVED = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
+
     mapping(address => uint256) ownershipTokenCount;
     mapping(uint256 => address) public kittyIndexToOwner;
 
@@ -26,7 +31,7 @@ contract kittyContract is IERC721, Ownable {
 
     //MyAddress => OperatorAddress => TRUE/FALSE
     // EX: _operatorApprovals[MyAddress][OperatorAddress] = false;
-    mapping(uint256 => mapping(address => bool)) private _operatorApprovals;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
 
 
     struct Kitty {
@@ -100,7 +105,7 @@ contract kittyContract is IERC721, Ownable {
     /*
      * @dev Returns the total number of tokens in circulation.
      */
-    function totalSupply() external override view returns (uint256 total){
+    function totalSupply() public override view returns (uint256 total){
         return kitties.length;
     }
 
@@ -163,9 +168,13 @@ contract kittyContract is IERC721, Ownable {
     function _owns(address _claimant, uint256 _tokenId) internal view returns (bool result) {
         return kittyIndexToOwner[_tokenId] == _claimant;
     }
+    
+    function isApprovedForAll(address _owner, address _operator) override public view returns (bool) {
+        return _operatorApprovals[_owner][_operator];
+    }
 
     function approve(address _approved, uint256 _tokenId) override external{
-        require(_owns(msg.sender, _tokenId) || isApprovedForAll(ownerOf[_tokenId], _approved));
+        require(_owns(msg.sender, _tokenId) || _operatorApprovals[msg.sender][_approved]);
         kittyIndexToApproved[_tokenId] = _approved;
         emit Approval(msg.sender, _approved, _tokenId);
     }
@@ -177,22 +186,70 @@ contract kittyContract is IERC721, Ownable {
         emit ApprovalForAll(msg.sender, _operator, _approved);
     }
 
-    function getApproved(uint256 _tokenId) override external view returns (address) {
+    function getApproved(uint256 _tokenId) override public view returns (address) {
         require(_tokenId < totalSupply());
         return kittyIndexToApproved[_tokenId];
     }
 
-    function isApprovedForAll(address _owner, address _operator) override external view returns (bool) {
-        return _operatorApprovals[_owner][_operator];
-    }
 
     function transferFrom(address _from, address _to, uint256 _tokenId) override external {
-        require(msg.sender == _from || isApprovedForAll(_from, msg.sender) || getApproved[_tokenId] == msg.sender);
+        require(msg.sender == _from || isApprovedForAll(_from, msg.sender) ||  approvedFor(msg.sender,_tokenId));
         require(_owns(_from, _tokenId));
         require(_to != address(0));
         require(_tokenId < totalSupply());
         _transfer(_from, _to, _tokenId);
     }
 
+    function _safeTransfer(address _from, address _to, uint256 _tokenId, bytes memory _data) internal{
+        _transfer(_from, _to, _tokenId);
+        require(_checkERC721Support(_from, _to, _tokenId, _data));
+    }
+
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) override external {
+        require(_owns(msg.sender, _tokenId)|| approvedFor(msg.sender,_tokenId)|| isApprovedForAll(_from,msg.sender));
+        require(_from == kittyIndexToOwner[_tokenId]);
+        require(_to != address(0));
+        require(_tokenId < kitties.length);
+
+        _safeTransfer(_from, _to, _tokenId, data);
+    }
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) override external {
+        require(_owns(msg.sender, _tokenId)|| approvedFor(msg.sender,_tokenId)|| isApprovedForAll(_from,msg.sender));
+        require(_from == kittyIndexToOwner[_tokenId]);
+        require(_to != address(0));
+        require(_tokenId < kitties.length);
+
+        _safeTransfer(_from, _to, _tokenId, "");
+    }
+
+    function approvedFor(address _claimant, uint256 _tokenId) internal view returns (bool) {
+        return kittyIndexToApproved[_tokenId] == _claimant;
+    }
+
+    function _checkERC721Support(address _from, address _to, uint256 _tokenId, bytes memory _data) internal returns (bool) {
+        if( !_isContract(_to) ){ //if it isn't a contract, we're sending to a wallet, and no further checks required
+            return true;
+        }
+        
+        //have to call the _to contract, call onERC721Received
+        bytes4 returnData = IERC721Receiver(_to).onERC721Received(msg.sender, _from, _tokenId, _data);
+
+        //check return value is equal to bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))
+        return returnData == MAGIC_ERC721_RECEIVED;
+    }
+
+    function _isContract(address _to) view internal returns (bool) {
+        // checking if code size is greater than 0
+        // wallets have a code size of 0
+
+        uint32 size;
+        assembly{
+            size := extcodesize(_to)
+        }
+        return size > 0;
+
+    }
 
 }

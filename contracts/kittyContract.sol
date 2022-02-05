@@ -5,8 +5,6 @@ import "../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "./IERC721Receiver.sol";
 
-// START AT 11:00 mark
-// https://academy.moralis.io/lessons/assignment-safetransfer-implementation
 
 contract kittyContract is IERC721, Ownable {
 

@@ -12,6 +12,12 @@ contract kittyContract is IERC721, Ownable {
 
     using SafeMath for uint256;
 
+    // this value comes from the bytes4 value of each function
+    // header and then an XOR is applied accross all of them
+    bytes4 private constant _INTERFACE_ID_ERC721 = 0x80ac58cd;
+
+    bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
+
     event Birth(
                 address owner, 
                 uint256 kittenId,
@@ -44,7 +50,11 @@ contract kittyContract is IERC721, Ownable {
 
     Kitty[] kitties;
     
-    uint256 gen0Counter;
+    uint256 public gen0Counter;
+
+    function supportsInterface(bytes4 _interfaceId) external view returns (bool) {
+        return (_interfaceId == _INTERFACE_ID_ERC721 || _interfaceId == _INTERFACE_ID_ERC165);
+    }
 
     function getKitty(uint256 _kittenId) public returns(
         uint256 genes, 

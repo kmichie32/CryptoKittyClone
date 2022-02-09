@@ -50,11 +50,39 @@ contract kittyContract is IERC721, Ownable {
     
     uint256 public gen0Counter;
 
+    function breed(uint256 _dadId, uint256 _mumId) public returns (uint256) {
+        // require that the msg.sender is the owner of the dad and mom
+        require(_owns(msg.sender, _dadId)); 
+        require(_owns(msg.sender, _mumId));    
+        // Figure out the Generation
+        /*
+        How I approached
+        uint16 newGen;
+        Kitty memory dad = kitties[_dadId];
+        Kitty memory mom = kitties[_mumId];
+        */
+
+        ( uint256 dadDNA,,,,uint256 dadGeneration, ) = getKitty(_dadId);
+        ( uint256 momDNA,,,,uint256 mumGeneration, ) = getKitty(_dadId);
+
+        uint256 newGen;
+        if(mumGeneration > dadGeneration) {
+            newGen = dadGeneration + 1;
+        } else {
+            newGen = mumGeneration + 1;
+        }
+
+        // Create a new cat with the new properties, give it to msg.sender
+        uint256 newDna = _mixDNA(dadDNA, momDNA);
+
+        return _createKitty(_mumId, _dadId, newGen, newDna, msg.sender);
+    }
+
     function supportsInterface(bytes4 _interfaceId) external view returns (bool) {
         return (_interfaceId == _INTERFACE_ID_ERC721 || _interfaceId == _INTERFACE_ID_ERC165);
     }
 
-    function getKitty(uint256 _kittenId) public returns(
+    function getKitty(uint256 _kittenId) public view returns(
         uint256 genes, 
         uint256 birthTime,
         uint256 mumId,
@@ -258,6 +286,17 @@ contract kittyContract is IERC721, Ownable {
         }
         return size > 0;
 
+    }
+
+    function _mixDNA(uint256 dadDNA, uint256 momDNA) view internal returns(uint256){
+        // dadId: 11 22 33 44 55 66 77 88
+        // mumId: 88 77 66 55 44 33 22 11
+
+        uint256 dadHalf = dadDNA/100000000; // 11 22 33 44
+        uint256 momHalf = momDNA%100000000; // 44 33 22 11
+
+        uint256 newDNA = (dadHalf*100000000)+momHalf;
+        return newDNA;
     }
 
 }
